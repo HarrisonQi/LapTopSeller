@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/main")
 public class MainController {
 
-    @Autowired
-    private ITestService testService;
 
     @RequestMapping("/index")
     public String index(@RequestParam(required = false)String username, Model model){
@@ -31,10 +29,6 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping("/test")
-    public String test(){
-        System.out.println("List:"+testService.testList());
-        return "";
-    }
+
 
 }
