@@ -45,7 +45,7 @@
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="" onclick="logout()">退出</a></li>
         </ul>
     </div>
 
@@ -93,6 +93,23 @@
         var element = layui.element;
 
     });
+
+    function logout() {
+        $.ajax({
+            type: 'GET',
+            url: '${pageContext.request.contextPath}/api/logout',
+            data: {
+                username: $('#username').val()
+            },
+
+            dataType: 'json',
+            success: function () {
+
+                    window.location.href = '${pageContext.request.contextPath}/main/login';
+
+            }
+        });
+    }
 </script>
 </body>
 </html>

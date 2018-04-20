@@ -1,6 +1,8 @@
 package data.controller;
 
 import data.entity.User;
+import data.service.ITestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/main")
 public class MainController {
+
+    @Autowired
+    private ITestService testService;
 
     @RequestMapping("/index")
     public String index(@RequestParam(required = false)String username, Model model){
@@ -24,6 +29,12 @@ public class MainController {
     @RequestMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @RequestMapping("/test")
+    public String test(){
+        System.out.println("List:"+testService.testList());
+        return "";
     }
 
 }
