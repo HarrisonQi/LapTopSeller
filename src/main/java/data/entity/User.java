@@ -37,4 +37,14 @@ public class User {
     public void setLevel(String level) {
         this.level = level;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", level='" + level + '\'' +
+                '}';
+    }
 }

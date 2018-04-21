@@ -39,4 +39,14 @@ public class Test {
     public void setNumber(int number) {
         this.number = number;
     }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "id=" + id +
+                ", string='" + string + '\'' +
+                ", date=" + date +
+                ", number=" + number +
+                '}';
+    }
 }

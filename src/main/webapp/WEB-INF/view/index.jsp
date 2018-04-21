@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
     <title>首页</title>
@@ -22,30 +24,33 @@
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <c:if test="${user.level==1}">
+                <li class="layui-nav-item"><a href="" onclick="alert('1')">权限控制</a></li>
+            </c:if>
             <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
-                </dl>
-            </li>
+            <li class="layui-nav-item"><a href="">用户管理</a></li>
+            <li class="layui-nav-item"><a href="">订单交易管理</a></li>
+            <%--<li class="layui-nav-item">--%>
+                <%--<a href="javascript:;">其它系统</a>--%>
+                <%--<dl class="layui-nav-child">--%>
+                    <%--<dd><a href="">邮件管理</a></dd>--%>
+                    <%--<dd><a href="">消息管理</a></dd>--%>
+                    <%--<dd><a href="">授权管理</a></dd>--%>
+                <%--</dl>--%>
+            <%--</li>--%>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    贤心
+                <a href="javascript:;" style="font-size: larger">
+                    <%--<img src="http://t.cn/RCzsdCq" class="layui-nav-img">--%>
+                    ${user.username}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
+                    <%--<dd><a href="">基本资料</a></dd>--%>
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="" onclick="logout()">退出</a></li>
+            <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/main/login" onclick="logout()">退出</a></li>
         </ul>
     </div>
 
@@ -56,22 +61,23 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">所有商品</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="javascript:;">游戏本</a></dd>
+                        <dd><a href="javascript:;">商务本</a></dd>
+                        <dd><a href="javascript:;">上网本</a></dd>
+                        <%--<dd><a href="">超链接</a></dd>--%>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">解决方案</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">云市场</a></li>
+                <%--<li class="layui-nav-item">--%>
+                    <%--<a href="javascript:;">解决方案</a>--%>
+                    <%--<dl class="layui-nav-child">--%>
+                        <%--<dd><a href="javascript:;">列表一</a></dd>--%>
+                        <%--<dd><a href="javascript:;">列表二</a></dd>--%>
+                        <%--<dd><a href="">超链接</a></dd>--%>
+                    <%--</dl>--%>
+                <%--</li>--%>
+                <%--<li class="layui-nav-item"><a href="">云市场</a></li>--%>
                 <li class="layui-nav-item"><a href="">发布商品</a></li>
+                <li class="layui-nav-item"><a href="">安全设置</a></li>
             </ul>
         </div>
     </div>
@@ -96,7 +102,7 @@
 
     function logout() {
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: '${pageContext.request.contextPath}/api/logout',
             data: {
                 username: $('#username').val()
@@ -105,7 +111,7 @@
             dataType: 'json',
             success: function () {
 
-                    window.location.href = '${pageContext.request.contextPath}/main/login';
+                window.location.href = '${pageContext.request.contextPath}/main/login';
 
             }
         });

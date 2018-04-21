@@ -2,7 +2,9 @@ package data.controller.api;
 
 import data.common.Response;
 import data.entity.User;
+import data.service.IUserService;
 import data.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,9 @@ public class LoginController {
     @Resource
     HttpServletRequest request;
 
+    @Autowired
+    private IUserService userService;
+
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
     @ResponseBody
@@ -35,13 +40,10 @@ public class LoginController {
         if (StringUtil.isBlank(password)) {
             return Response.error("密码为空！");
         }
-        User user = new User();
-        user.setUsername("admin");
-        user.setPassword("123");
-        user.setLevel("1");
-        user.setMobile("110");
-
+        User user = userService.getUserByName(username);
+        System.out.println(user);
         if (user == null) {
+            System.out.println("用户名不存在");
             return Response.error("用户名不存在！");
         }
         if (!StringUtil.equals(password, user.getPassword())) {
