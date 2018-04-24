@@ -11,9 +11,10 @@
 
 <html>
 <head>
-    <title>首页</title>
+    <title>发布商品</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css" media="all">
     <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.js"></script>
+    <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
 </head>
 
 <body class="layui-layout-body">
@@ -99,31 +100,77 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <%--<div style="padding: 15px;">商品列表:</div>--%>
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-            <legend>商品列表</legend>
+            <legend>发布商品</legend>
         </fieldset>
-        <div>
-            <button class="layui-btn layui-btn-lg" style="margin-left: 10px; margin-top: 10px"
-                    onclick="window.location.href='${pageContext.request.contextPath}/main/uploadCommodity?username=${user.username }'">
-                发布商品
-            </button>
-        </div>
-        <table class="layui-hide" id="demo"></table>
+        <form class="layui-form" action="">
+
+
+            <div style="margin-left: 10px; margin-top: 10px; width: 600px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">笔记本名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">笔记本价格</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">生产商</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">品牌</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">型号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单选框</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="上网本" title="上网本">
+                        <input type="radio" name="sex" value="游戏本" title="游戏本" checked="">
+                        <input type="radio" name="sex" value="商务本" title="商务本">
+                        <input type="radio" name="sex" value="其他" title="其他">
+
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
     </div>
+
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
         <%--© layui.com - 底部固定区域--%>
     </div>
 </div>
-<script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function () {
-        var element = layui.element;
 
-    });
+
+<script>
 
     function logout() {
         $.ajax({
@@ -141,59 +188,13 @@
             }
         });
     }
+
 </script>
 <script>
-
-    var list;
-
-    $(function () {
-        getAllLaptops();
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render();
     })
-
-    function getAllLaptops() {
-        $.ajax({
-            type: 'POST',
-            url: '${pageContext.request.contextPath}/laptop/getAll',
-            data: {
-                // username: $('#username').val(),
-                // password: $('#password').val()
-            },
-
-            dataType: 'json',
-            success: function (result) {
-                if (result.code == 0) {
-                    list = result.data;
-                } else {
-                    $('#hintText').text(result.msg);
-                }
-            }
-        });
-    }
-
-
-    layui.use('table', function () {
-        var table = layui.table;
-
-        //展示已知数据
-        table.render({
-            elem: '#demo'
-            , cols: [[ //标题栏
-                {field: 'id', title: 'ID', sort: true}
-                , {field: 'name', title: '电脑名称', sort: true}
-                , {field: 'price', title: '价格', sort: true}
-                , {field: 'producer', title: '生产商', sort: true}
-                , {field: 'brand', title: '品牌', sort: true}
-                , {field: 'model', title: '型号', sort: true}
-                , {field: 'tag', title: '标签', sort: true}
-            ]]
-            , data: list
-            //,skin: 'line' //表格风格
-            , even: true
-            //,page: true //是否显示分页
-            //,limits: [5, 7, 10]
-            //,limit: 5 //每页默认显示的数量
-        });
-    });
 </script>
 </body>
 </html>

@@ -31,6 +31,7 @@
     <mvc:resources mapping="/img/**" location="/img/"/>
     <mvc:resources mapping="/fonts/**" location="/fonts/"/>
     <mvc:resources mapping="/layui/**" location="/layui/"/>
+    <mvc:resources mapping="/models/**" location="/models/"/>
 
     <!-- 拦截器 -->
     <mvc:interceptors>
@@ -42,6 +43,8 @@
             <mvc:exclude-mapping path="/layui/**"/>
             <mvc:exclude-mapping path="/js/**"/>
             <mvc:exclude-mapping path="/test/**"/>
+            <mvc:exclude-mapping path="/models/**"/>
+            <mvc:exclude-mapping path="/img/**"/>
             <bean class="data.interceptor.LoginInterceptor"/>
 
         </mvc:interceptor>

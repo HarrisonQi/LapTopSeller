@@ -20,4 +20,8 @@ public class UserServiceImple implements IUserService {
     public User getUserByName(String username) {
         return userMapper.getUserByUsername(username);
     }
+
+    public List<User> getAllUser() {
+        return userMapper.getAllUser();
+    }
 }

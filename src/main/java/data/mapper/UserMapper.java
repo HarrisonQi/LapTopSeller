@@ -8,5 +8,8 @@ import java.util.List;
 
 @Repository
 public interface UserMapper {
+
     User getUserByUsername(String username);
+
+    List<User> getAllUser();
 }

@@ -7,5 +7,8 @@ import data.entity.User;
 import java.util.List;
 
 public interface IUserService {
+
     User getUserByName(String username);
+
+    List<User> getAllUser();
 }
