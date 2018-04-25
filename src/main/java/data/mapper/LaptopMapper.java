@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface LaptopMapper {
     List<Laptop> getAll();
+
+    int add(Laptop laptop);
 }

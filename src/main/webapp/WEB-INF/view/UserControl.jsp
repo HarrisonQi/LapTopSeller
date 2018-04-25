@@ -17,106 +17,82 @@
 </head>
 
 <body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo">
-            <%--<i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe68e;</i>--%>
-            <a style="color: #5FB878; font-size: large" href="${pageContext.request.contextPath}/main/index?username=${user.username }">笔记本销售后台管理</a>
-        </div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-            <c:if test="${user.level==1}">
-                <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/main/authorityControl?username=${user.username }">权限控制</a></li>
-            </c:if>
-            <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/main/commodityControl?username=${user.username }">商品管理</a></li>
-            <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/main/userControl?username=${user.username }">用户管理</a></li>
-            <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/main/orderControl?username=${user.username }">订单交易管理</a></li>
-            <%--<li class="layui-nav-item">--%>
-            <%--<a href="javascript:;">其它系统</a>--%>
-            <%--<dl class="layui-nav-child">--%>
-            <%--<dd><a href="">邮件管理</a></dd>--%>
-            <%--<dd><a href="">消息管理</a></dd>--%>
-            <%--<dd><a href="">授权管理</a></dd>--%>
-            <%--</dl>--%>
-            <%--</li>--%>
-        </ul>
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;" style="font-size: larger">
-                    <%--<img src="http://t.cn/RCzsdCq" class="layui-nav-img">--%>
-                    ${user.username}
-                </a>
-                <dl class="layui-nav-child">
-                    <%--<dd><a href="">基本资料</a></dd>--%>
-                    <dd><a href="${pageContext.request.contextPath}/main/securitySettings?username=${user.username }">安全设置</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/main/login" onclick="logout()">退出</a></li>
-        </ul>
-    </div>
+<jsp:include page="Sidebar.jsp"/>
 
-    <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">游戏本</a></dd>
-                        <dd><a href="javascript:;">商务本</a></dd>
-                        <dd><a href="javascript:;">上网本</a></dd>
-                        <%--<dd><a href="">超链接</a></dd>--%>
-                    </dl>
-                </li>
-                <%--<li class="layui-nav-item">--%>
-                <%--<a href="javascript:;">解决方案</a>--%>
-                <%--<dl class="layui-nav-child">--%>
-                <%--<dd><a href="javascript:;">列表一</a></dd>--%>
-                <%--<dd><a href="javascript:;">列表二</a></dd>--%>
-                <%--<dd><a href="">超链接</a></dd>--%>
-                <%--</dl>--%>
-                <%--</li>--%>
-                <%--<li class="layui-nav-item"><a href="">云市场</a></li>--%>
-                <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/main/uploadCommodity?username=${user.username }">发布商品</a></li>
-                <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/main/securitySettings?username=${user.username }">安全设置</a></li>
-            </ul>
-        </div>
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div>
+        <button class="layui-btn layui-btn-lg" style="margin-left: 10px; margin-top: 75px"
+                onclick="window.location.href='${pageContext.request.contextPath}/main/addUser?username=${user.username }'">
+            新增用户
+        </button>
     </div>
+    <table class="layui-hide" id="userTable"></table>
+</div>
 
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
-    </div>
-
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        <%--© layui.com - 底部固定区域--%>
-    </div>
+<div class="layui-footer">
+    <!-- 底部固定区域 -->
+    <%--© layui.com - 底部固定区域--%>
+</div>
 </div>
 <script src="${pageContext.request.contextPath}/layui/layui.js" charset="utf-8"></script>
 <script>
     //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
-
     });
 
-    function logout() {
+</script>
+
+<script>
+
+    var list;
+
+    $(function () {
+        getAllLaptops();
+    })
+
+    function getAllLaptops() {
         $.ajax({
             type: 'POST',
-            url: '${pageContext.request.contextPath}/api/logout',
+            url: '${pageContext.request.contextPath}/user/getAllUser',
             data: {
-                username: $('#username').val()
+                // username: $('#username').val(),
+                // password: $('#password').val()
             },
 
             dataType: 'json',
-            success: function () {
-
-                window.location.href = '${pageContext.request.contextPath}/main/login';
-
+            success: function (result) {
+                if (result.code == 0) {
+                    list = result.data;
+                } else {
+                    alert(result.msg);
+                }
             }
         });
     }
+
+
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //展示已知数据
+        table.render({
+            elem: '#userTable'
+            , cols: [[ //标题栏
+                {field: 'username', title: '用户名', sort: true}
+                , {field: 'password', title: '密码', sort: true}
+                , {field: 'level', title: '等级', sort: true}
+                , {field: 'mobile', title: '手机号', sort: true}
+            ]]
+            , data: list
+            //,skin: 'line' //表格风格
+            , even: true
+            //,page: true //是否显示分页
+            //,limits: [5, 7, 10]
+            //,limit: 5 //每页默认显示的数量
+        });
+    });
 </script>
 </body>
 </html>

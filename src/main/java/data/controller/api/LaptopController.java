@@ -29,4 +29,27 @@ public class LaptopController {
         System.out.println(laptops);
         return Response.success("查询成功", laptops);
     }
+
+    @RequestMapping("/add")
+    @ResponseBody
+    public Response add(@RequestParam(value = "name") String name,
+                        @RequestParam(value = "price") String price,
+                        @RequestParam(value = "producer") String producer,
+                        @RequestParam(value = "brand") String brand,
+                        @RequestParam(value = "model") String model,
+                        @RequestParam(value = "tag") String tag){
+        System.out.println(name+","+price+","+producer+","+brand+","+model+","+tag);
+        Laptop laptop = new Laptop();
+        laptop.setBrand(brand);
+        laptop.setModel(model);
+        laptop.setName(name);
+        laptop.setPrice(price);
+        laptop.setProducer(producer);
+        laptop.setTag(tag);
+        if(laptopService.add(laptop)>0){
+            return Response.success("添加成功", laptop);
+        }
+
+        return Response.error("添加失败, 请联系技术人员!");
+    }
 }

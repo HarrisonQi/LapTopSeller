@@ -2,7 +2,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.mapper.UserMapper">
+
+    <select id="getAllUser" resultType="data.entity.User">
+        select * from user
+    </select>
     <select id="getUserByUsername" parameterType="java.lang.String" resultType="data.entity.User">
         select * from user where username = #{username}
     </select>
+
+    <update id="updateUser" parameterType="data.entity.User">
+        update user set
+        username = #{username}
+
+        <if test="password!=null and password!=''">,password = #{password}</if>
+        <if test="level!=null and level!=''">,level = #{level}</if>
+        <if test="mobile!=null and mobile!=''">,mobile = #{mobile}</if>
+        where username = #{username}
+    </update>
+
+    <insert id="addUser" parameterType="data.entity.User">
+        insert into user
+        (username, password, level, mobile) VALUES (#{username}, #{password}, #{level}, #{mobile})
+    </insert>
+
 </mapper>

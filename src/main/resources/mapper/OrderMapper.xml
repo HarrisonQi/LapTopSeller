@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.OrderMapper">
+    <select id="getAllRelation" resultType="java.util.Map">
+        select ld.name, ld.brand, ld.model, ob.mount, ld.price, (ob.mount * ld.price) as "totalPrice", from_unixtime( ob.time,'%Y-%d')   from
+        order_business ob
+        LEFT JOIN laptop_details ld on ob.laptop_id = ld.id
+        LEFT JOIN user us on ob.user_id = us.id
+    </select>
+
+    <insert id="add" parameterType="data.entity.Order">
+        insert into order_business (laptop_id, user_id, mount) values (#{laptop_id}, #{user_id}, #{mount})
+    </insert>
+
+</mapper>

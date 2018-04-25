@@ -17,4 +17,8 @@ public class LapTopServiceImple implements ILaptopService {
     public List<Laptop> getAll() {
         return laptopMapper.getAll();
     }
+
+    public int add(Laptop laptop) {
+        return laptopMapper.add(laptop);
+    }
 }

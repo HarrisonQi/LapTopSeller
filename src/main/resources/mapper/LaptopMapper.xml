@@ -5,4 +5,10 @@
     <select id="getAll" resultType="data.entity.Laptop">
         select * from laptop_details
     </select>
+
+    <insert id="add" parameterType="data.entity.Laptop">
+        insert into laptop_details (name, price, producer, brand, model, tag)
+        values
+        (#{name}, #{price}, #{producer}, #{brand}, #{model}, #{tag})
+    </insert>
 </mapper>

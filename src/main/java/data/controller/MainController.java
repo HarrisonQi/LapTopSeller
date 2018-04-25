@@ -70,4 +70,25 @@ public class MainController {
         return "UploadCommodity";
     }
 
+    @RequestMapping("/updateUserLevel")
+    public String updateUserLevel(@RequestParam(required = false) String username, Model model) {
+        User user = userService.getUserByName(username);
+        model.addAttribute("user", user);
+        return "UpdateUserLevel";
+    }
+
+    @RequestMapping("/addUser")
+    public  String addUser(@RequestParam(required = false) String username, Model model) {
+        User user = userService.getUserByName(username);
+        model.addAttribute("user", user);
+        return "AddUser";
+    }
+
+    @RequestMapping("/addOrder")
+    public  String addOrder(@RequestParam(required = false) String username, Model model) {
+        User user = userService.getUserByName(username);
+        model.addAttribute("user", user);
+        return "AddOrder";
+    }
+
 }

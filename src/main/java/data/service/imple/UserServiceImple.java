@@ -24,4 +24,12 @@ public class UserServiceImple implements IUserService {
     public List<User> getAllUser() {
         return userMapper.getAllUser();
     }
+
+    public int updateUser(User user) {
+        return userMapper.updateUser(user);
+    }
+
+    public int addUser(User user) {
+        return userMapper.addUser(user);
+    }
 }
