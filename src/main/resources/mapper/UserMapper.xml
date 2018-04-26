@@ -13,16 +13,20 @@
     <update id="updateUser" parameterType="data.entity.User">
         update user set
         username = #{username}
-
         <if test="password!=null and password!=''">,password = #{password}</if>
         <if test="level!=null and level!=''">,level = #{level}</if>
         <if test="mobile!=null and mobile!=''">,mobile = #{mobile}</if>
-        where username = #{username}
+        where 1=1
+        and username = #{username}
     </update>
 
     <insert id="addUser" parameterType="data.entity.User">
         insert into user
         (username, password, level, mobile) VALUES (#{username}, #{password}, #{level}, #{mobile})
     </insert>
+
+    <update id="delUserByName" parameterType="java.lang.String">
+        delete from user where username = #{username}
+    </update>
 
 </mapper>

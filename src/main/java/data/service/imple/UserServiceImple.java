@@ -32,4 +32,12 @@ public class UserServiceImple implements IUserService {
     public int addUser(User user) {
         return userMapper.addUser(user);
     }
+
+    public int changePwd(User user) {
+        return userMapper.updateUser(user);
+    }
+
+    public int delUserByName(String username) {
+        return userMapper.delUserByName(username);
+    }
 }

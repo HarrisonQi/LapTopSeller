@@ -21,4 +21,8 @@ public class LapTopServiceImple implements ILaptopService {
     public int add(Laptop laptop) {
         return laptopMapper.add(laptop);
     }
+
+    public int delByName(String name) {
+        return laptopMapper.delByName(name);
+    }
 }

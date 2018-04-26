@@ -90,5 +90,17 @@ public class MainController {
         model.addAttribute("user", user);
         return "AddOrder";
     }
+    @RequestMapping("/delLaptop")
+    public  String delLaptop(@RequestParam(required = false) String username, Model model) {
+        User user = userService.getUserByName(username);
+        model.addAttribute("user", user);
+        return "DelLaptop";
+    }
+    @RequestMapping("/delUser")
+    public  String delUser(@RequestParam(required = false) String username, Model model) {
+        User user = userService.getUserByName(username);
+        model.addAttribute("user", user);
+        return "DelUser";
+    }
 
 }

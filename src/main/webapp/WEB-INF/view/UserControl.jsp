@@ -26,6 +26,10 @@
                 onclick="window.location.href='${pageContext.request.contextPath}/main/addUser?username=${user.username }'">
             新增用户
         </button>
+        <button class="layui-btn layui-btn-lg layui-btn-danger" style="margin-left: 10px; margin-top: 75px"
+                onclick="window.location.href='${pageContext.request.contextPath}/main/delUser?username=${user.username }'">
+            删除用户
+        </button>
     </div>
     <table class="layui-hide" id="userTable"></table>
 </div>

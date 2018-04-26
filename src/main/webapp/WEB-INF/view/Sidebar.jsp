@@ -77,9 +77,9 @@
                     <dl class="layui-nav-child">
                         <dd><a href="${pageContext.request.contextPath}/main/index?username=${user.username}">全部</a>
                         </dd>
-                        <dd><a href="javascript:;">游戏本</a></dd>
-                        <dd><a href="javascript:;">商务本</a></dd>
-                        <dd><a href="javascript:;">上网本</a></dd>
+                        <%--<dd><a href="javascript:;">游戏本</a></dd>--%>
+                        <%--<dd><a href="javascript:;">商务本</a></dd>--%>
+                        <%--<dd><a href="javascript:;">上网本</a></dd>--%>
                         <%--<dd><a href="">超链接</a></dd>--%>
                     </dl>
                 </li>

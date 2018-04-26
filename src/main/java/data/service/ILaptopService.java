@@ -7,4 +7,5 @@ import java.util.List;
 public interface ILaptopService {
     List<Laptop> getAll();
     int add(Laptop laptop);
+    int delByName(String name);
 }

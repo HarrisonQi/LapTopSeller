@@ -8,4 +8,6 @@ public interface LaptopMapper {
     List<Laptop> getAll();
 
     int add(Laptop laptop);
+
+    int delByName(String name);
 }

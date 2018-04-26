@@ -3,10 +3,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.mapper.OrderMapper">
     <select id="getAllRelation" resultType="java.util.Map">
-        select ld.name, ld.brand, ld.model, ob.mount, ld.price, (ob.mount * ld.price) as "totalPrice", from_unixtime( ob.time,'%Y-%d')   from
-        order_business ob
-        LEFT JOIN laptop_details ld on ob.laptop_id = ld.id
-        LEFT JOIN user us on ob.user_id = us.id
+        SELECT
+            ld.name,
+            ld.brand,
+            ld.model,
+            ob.mount,
+            ld.price,
+            ( ob.mount * ld.price ) AS "totalPrice",
+            ob.time
+        FROM
+            order_business ob
+            LEFT JOIN laptop_details ld ON ob.laptop_id = ld.id
+            LEFT JOIN USER us ON ob.user_id = us.id
     </select>
 
     <insert id="add" parameterType="data.entity.Order">

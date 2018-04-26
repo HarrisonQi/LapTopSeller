@@ -11,4 +11,8 @@
         values
         (#{name}, #{price}, #{producer}, #{brand}, #{model}, #{tag})
     </insert>
+
+    <update id="delByName" parameterType="java.lang.String">
+        delete from laptop_details where name = #{name}
+    </update>
 </mapper>

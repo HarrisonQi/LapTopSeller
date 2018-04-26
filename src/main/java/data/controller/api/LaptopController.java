@@ -52,4 +52,18 @@ public class LaptopController {
 
         return Response.error("添加失败, 请联系技术人员!");
     }
+    @RequestMapping("/del")
+    @ResponseBody
+    public Response del(@RequestParam(value = "name") String name){
+        Laptop laptop = new Laptop();
+        laptop.setName(name);
+        if(laptopService.delByName(name)>0){
+            return Response.success("删除成功", laptop);
+        }else  if(laptopService.delByName(name)==0){
+            return Response.error("删除失败, 可能无此笔记本", laptop);
+        }
+
+        return Response.error("删除失败, 请联系技术人员!");
+    }
+
 }

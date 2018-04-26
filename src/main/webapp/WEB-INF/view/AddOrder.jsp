@@ -47,8 +47,8 @@
 
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn"  lay-filter="formDemo" onclick="add()">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <button class="layui-btn"  lay-filter="formDemo" onclick="addOrder()">立即提交</button>
+            <%--<button type="reset" class="layui-btn layui-btn-primary">重置</button>--%>
         </div>
     </div>
 </div>
@@ -62,14 +62,15 @@
 
 
 <script>
-    function add() {
+    function addOrder() {
         $.ajax({
                 type: 'POST',
+
                 url: '${pageContext.request.contextPath}/order/addOrder',
                 data: {
-                    username: ${user.username},
+                    username: '${user.username}' ,
                     laptop_id: $('#laptop_id').val(),
-                    user_id: ${user.id},
+                    user_id: '${user.id}',
                     mount:$('#mount').val()
 
                 },
@@ -79,7 +80,7 @@
                     if(result.code==0){
                         window.location.href = '${pageContext.request.contextPath}/main/orderControl?username=${user.username}';
                     }else{
-                        alert(result.data);
+                        alert(result.msg);
                     }
 
                 }

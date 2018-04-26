@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,17 +32,24 @@ public class OrderController {
     @RequestMapping("/getAllRelation")
     @ResponseBody
     public Response getAllRelation(){
-        List<Map<String, Object>> orders = orderService.getAllRelation();
-        if(orders==null){
+        List<Map<String, Object>> listMap = orderService.getAllRelation();
+        if(listMap==null){
             return Response.error("无笔记本信息!");
         }
-        System.out.println(orders);
-        System.out.println(orders.toString());
+        //System.out.println(orders);
+        //System.out.println(orders.toString());
 
+        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        //sdf.format("1524703745000");
+        for(Map<String, Object> map :listMap){
+            map.put("time",sdf.format( map.get("time")));
+        }
 
-        System.out.println("getAllRelation");
+        //System.out.println(listMap);
+        //System.out.println(listMap.get(0).get("time").getClass());
+        //System.out.println("getAllRelation");
 
-        return Response.success("查询成功", orders);
+        return Response.success("查询成功", listMap);
     }
 
     //username: ${user.username},

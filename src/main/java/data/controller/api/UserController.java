@@ -80,6 +80,41 @@ public class UserController {
         return Response.error("添加失败, 请联系技术人员!");
     }
 
+    @RequestMapping("/changePwd")
+    @ResponseBody
+    public Response changePwd(@RequestParam(value = "username") String username,
+                            @RequestParam(value = "password") String password,
+                            @RequestParam(value = "mobile") String mobile){
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setMobile(mobile);
+
+        if(userService.changePwd(user)>0){
+            return Response.success("修改成功", userService.getUserByName(username));
+        }
+
+        return Response.error("添加失败, 请联系技术人员!");
+    }
+
+    @RequestMapping("/del")
+    @ResponseBody
+    public Response delUserByUsername(@RequestParam(value = "username") String username){
+        User user = new User();
+        user.setUsername(username);
+        //user.setPassword(password);
+        //user.setMobile(mobile);
+        if(userService.getUserByName(username)==null){
+            return Response.error("无此人员!");
+        }
+
+        if(userService.delUserByName(username)>0){
+            return Response.success("删除成功");
+        }
+
+        return Response.error("删除失败, 请联系技术人员!");
+    }
+
 
 
 }

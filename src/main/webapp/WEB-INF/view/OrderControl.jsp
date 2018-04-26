@@ -26,7 +26,7 @@
     <%--</fieldset>--%>
     <div>
         <button class="layui-btn layui-btn-lg" style="margin-left: 10px; margin-top: 75px"
-                onclick="window.location.href='${pageContext.request.contextPath}/main/addOrder?username=${user.username }'">
+                onclick="window.location.href='${pageContext.request.contextPath}/main/addOrder?username=${user.username}'">
             新增订单
         </button>
     </div>

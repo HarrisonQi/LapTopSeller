@@ -29,6 +29,10 @@
                     onclick="window.location.href='${pageContext.request.contextPath}/main/uploadCommodity?username=${user.username }'">
                 发布商品
             </button>
+            <button class="layui-btn layui-btn-lg layui-btn-danger" style="margin-left: 10px; margin-top: 75px"
+                    onclick="window.location.href='${pageContext.request.contextPath}/main/delLaptop?username=${user.username }'">
+                删除商品
+            </button>
         </div>
         <table class="layui-hide" id="demo"></table>
     </div>

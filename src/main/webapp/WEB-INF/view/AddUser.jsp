@@ -94,7 +94,7 @@
                     if(result.code==0){
                         window.location.href = '${pageContext.request.contextPath}/main/userControl?username=${user.username}';
                     }else{
-                        alert(result.data);
+                        alert(result.msg);
                     }
 
                 }
