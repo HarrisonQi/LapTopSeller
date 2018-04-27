@@ -24,20 +24,22 @@
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <c:if test="${user.level==1}">
+            <c:if test="${user.authority==1}">
                 <li class="layui-nav-item"><a
                         href="${pageContext.request.contextPath}/main/authorityControl?username=${user.username }">权限控制</a>
                 </li>
             </c:if>
-            <li class="layui-nav-item"><a
-                    href="${pageContext.request.contextPath}/main/index?username=${user.username }">商品管理</a>
-            </li>
-            <c:if test="${user.level<=2}">
+            <c:if test="${user.item==1}">
+                <li class="layui-nav-item"><a
+                        href="${pageContext.request.contextPath}/main/index?username=${user.username }">商品管理</a>
+                </li>
+            </c:if>
+            <c:if test="${user.user==1}">
                 <li class="layui-nav-item"><a
                         href="${pageContext.request.contextPath}/main/userControl?username=${user.username }">用户管理</a>
                 </li>
             </c:if>
-            <c:if test="${user.level<=3}">
+            <c:if test="${user.orders==1}">
                 <li class="layui-nav-item"><a
                         href="${pageContext.request.contextPath}/main/orderControl?username=${user.username }">订单交易管理</a>
                 </li>
@@ -72,17 +74,19 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="${pageContext.request.contextPath}/main/index?username=${user.username}">全部</a>
-                        </dd>
-                        <%--<dd><a href="javascript:;">游戏本</a></dd>--%>
-                        <%--<dd><a href="javascript:;">商务本</a></dd>--%>
-                        <%--<dd><a href="javascript:;">上网本</a></dd>--%>
-                        <%--<dd><a href="">超链接</a></dd>--%>
-                    </dl>
-                </li>
+                <c:if test="${user.item==1}">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;">所有商品</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="${pageContext.request.contextPath}/main/index?username=${user.username}">全部</a>
+                            </dd>
+                                <%--<dd><a href="javascript:;">游戏本</a></dd>--%>
+                                <%--<dd><a href="javascript:;">商务本</a></dd>--%>
+                                <%--<dd><a href="javascript:;">上网本</a></dd>--%>
+                                <%--<dd><a href="">超链接</a></dd>--%>
+                        </dl>
+                    </li>
+                </c:if>
                 <%--<li class="layui-nav-item">--%>
                 <%--<a href="javascript:;">解决方案</a>--%>
                 <%--<dl class="layui-nav-child">--%>
@@ -92,9 +96,11 @@
                 <%--</dl>--%>
                 <%--</li>--%>
                 <%--<li class="layui-nav-item"><a href="">云市场</a></li>--%>
-                <li class="layui-nav-item"><a
-                        href="${pageContext.request.contextPath}/main/uploadCommodity?username=${user.username }">发布商品</a>
-                </li>
+                <c:if test="${user.authority==1}">
+                    <li class="layui-nav-item"><a
+                            href="${pageContext.request.contextPath}/main/uploadCommodity?username=${user.username }">发布商品</a>
+                    </li>
+                </c:if>
                 <li class="layui-nav-item"><a
                         href="${pageContext.request.contextPath}/main/securitySettings?username=${user.username }">安全设置</a>
                 </li>

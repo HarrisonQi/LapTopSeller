@@ -19,4 +19,6 @@ public interface IUserService {
     int changePwd(User user);
 
     int delUserByName(String username);
+
+    int updateUserAuz(User user);
 }

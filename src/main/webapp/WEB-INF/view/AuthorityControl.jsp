@@ -89,7 +89,7 @@
             elem: '#userTable'
             , cols: [[ //标题栏
                 {field: 'username', title: '用户名', sort: true}
-                , {field: 'level', title: '等级', sort: true}
+                , {field: 'auths', title: '拥有权限', sort: true}
                 // , {field: 'right', title: '操作', toolbar: "#barDemo"}
             ]]
             , data: list

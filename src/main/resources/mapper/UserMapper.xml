@@ -14,8 +14,19 @@
         update user set
         username = #{username}
         <if test="password!=null and password!=''">,password = #{password}</if>
-        <if test="level!=null and level!=''">,level = #{level}</if>
+        <!--<if test="level!=null and level!=''">,level = #{level}</if>-->
         <if test="mobile!=null and mobile!=''">,mobile = #{mobile}</if>
+        <if test="user!=null and user!=''">, user = #{user}</if>
+        <if test="orders!=null and orders!=''">, orders = #{orders}</if>
+        <if test="authority!=null and authority!=''">, authority = #{authority}</if>
+        <if test="item!=null and item!=''">, item = #{item}</if>
+        where 1=1
+        and username = #{username}
+    </update>
+
+    <update id="updateUserAuz" parameterType="data.entity.User">
+        update user set
+        user = #{user}, orders = #{orders}, authority = #{authority}, item = #{item}
         where 1=1
         and username = #{username}
     </update>

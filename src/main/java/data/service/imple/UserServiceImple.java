@@ -40,4 +40,8 @@ public class UserServiceImple implements IUserService {
     public int delUserByName(String username) {
         return userMapper.delUserByName(username);
     }
+
+    public int updateUserAuz(User user) {
+        return userMapper.updateUserAuz(user);
+    }
 }

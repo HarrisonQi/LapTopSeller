@@ -20,4 +20,6 @@ public interface UserMapper {
     int changePwd(User user);
 
     int delUserByName(String username);
+
+    int updateUserAuz(User user);
 }

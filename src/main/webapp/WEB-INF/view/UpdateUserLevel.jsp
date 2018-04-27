@@ -25,7 +25,7 @@
     <form class="layui-form">
 
 
-        <div style="margin-left: 10px; margin-top: 10px; width: 600px;">
+        <div style="margin-left: 10px; margin-top: 10px; width: 700px;">
             <div class="layui-form-item">
                 <label class="layui-form-label">用户名称:</label>
                 <div class="layui-input-block">
@@ -35,14 +35,25 @@
                 </div>
             </div>
 
+            <%--<div class="layui-form-item">--%>
+            <%--<label class="layui-form-label">等级:</label>--%>
+            <%--<div id='level' class="layui-input-block">--%>
+            <%--<input type="radio" name="kind" value="1" title="1">--%>
+            <%--<input type="radio" name="kind" value="2" title="2">--%>
+            <%--<input type="radio" name="kind" value="3" title="3">--%>
+            <%--</div>--%>
+            <%--</div>--%>
+
             <div class="layui-form-item">
-                <label class="layui-form-label">等级:</label>
-                <div id='level' class="layui-input-block">
-                    <input type="radio" name="kind" value="1" title="1">
-                    <input type="radio" name="kind" value="2" title="2">
-                    <input type="radio" name="kind" value="3" title="3">
+                <label class="layui-form-label">设置权限: </label>
+                <div id="auzdiv" class="layui-input-block">
+                    <input type="checkbox" name="auz[auz]" title="权限控制">
+                    <input type="checkbox" name="auz[item]" title="商品管理">
+                    <input type="checkbox" name="auz[user]" title="用户管理">
+                    <input type="checkbox" name="auz[orders]" title="订单交易管理">
                 </div>
             </div>
+
         </div>
 
     </form>
@@ -64,21 +75,33 @@
 
 <script>
     function update() {
+        // var checks = {};
+        // $("input[name='auz']:checked").each(function (i) {//把所有被选中的复选框的值存入数组
+        //     checks[i] = $(this).val();
+        // });
+
         $.ajax({
                 type: 'POST',
                 url: '${pageContext.request.contextPath}/user/updateUser',
                 data: {
                     username: $('#username').val(),
-                    level: $('input:radio[name="kind"]:checked').val()
+                    // level: $('input:radio[name="kind"]:checked').val()
+
+                    auz: $("input[name='auz[auz]']:checked").val(),
+                    item: $("input[name='auz[item]']:checked").val(),
+                    cuser: $("input[name='auz[user]']:checked").val(),
+                    orders: $("input[name='auz[orders]']:checked").val(),
+
 
                 },
+                traditional: true,
 
                 dataType: 'json',
                 success: function (result) {
-                    if(result.code==0){
+                    if (result.code == 0) {
 
                         window.location.href = '${pageContext.request.contextPath}/main/authorityControl?username=${user.username}';
-                    }else{
+                    } else {
 
                         alert(result.msg);
                     }
